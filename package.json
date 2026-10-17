@@ -1,0 +1,28 @@
+{
+  "name": "paris-3d",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "license": "EUPL-1.2",
+  "description": "Paris en volume : le bâti par période de construction, en 3D, avec vol libre",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@deck.gl/core": "9.2.11",
+    "@deck.gl/extensions": "9.2.11",
+    "@deck.gl/layers": "9.2.11",
+    "@deck.gl/mesh-layers": "9.2.11",
+    "@fontsource/eb-garamond": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/instrument-sans": "5.3.0",
+    "@luma.gl/core": "9.2.6",
+    "@luma.gl/engine": "9.2.6",
+    "@luma.gl/shadertools": "9.2.6"
+  },
+  "devDependencies": {
+    "vite": "7.1.12"
+  }
+}
