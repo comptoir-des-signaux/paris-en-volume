@@ -9,8 +9,8 @@ jours, Seine, canaux, jardins, 175 671 arbres, et un mode de vol libre.
 
 L'idée et la plus grande partie du cahier des charges viennent du banc d'essai public de
 Charles de Lassence, « LLM benchmark: 3D Atlas of Paris » (octobre 2026), qui soumet la même
-invite aux modèles frontière : https://lassence.net/demos/benchmark/ . Son texte n'indique
-aucune licence : il n'est pas reproduit ici. Apport de Pascal Chevallot (Comptoir des
+invite aux modèles frontière : https://lassence.net/demos/benchmark/ . Son texte (attentes et
+sources) est reproduit dans `prompt_paris_3d.md` avec l'accord de son auteur (17/10/2026). Apport de Pascal Chevallot (Comptoir des
 Signaux) : la section « Immersive 3D Fly-Through Navigation » (mode de vol libre).
 
 Le code est écrit par un agent d'IA (Claude, Opus 5.5) sous la direction de Pascal
@@ -20,6 +20,8 @@ publié à part, sous licence CC BY-SA 4.0.
 ## Licences
 
 - Code : EUPL-1.2 (`LICENSE`).
+- Invite (`prompt_paris_3d.md`) : texte de Charles de Lassence, reproduit avec son accord,
+  hors licence EUPL ; la section de vol libre est de Pascal Chevallot.
 - Données dérivées chargées par la carte : ODbL 1.0 (`LICENCE-DONNEES.txt`), produites par
   `scripts/fetch_data.py` et `scripts/build_data.py`.
 - Polices : SIL Open Font License, jointes au build (`licences/`).
