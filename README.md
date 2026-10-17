@@ -9,7 +9,7 @@ jours, Seine, canaux, jardins, 175 671 arbres, et un mode de vol libre.
 
 L'idée et la plus grande partie du cahier des charges viennent du banc d'essai public de
 Charles de Lassence, « LLM benchmark: 3D Atlas of Paris » (octobre 2026), qui soumet la même
-invite aux modèles frontière : https://lassence.net/demos/benchmark/ . Son texte (attentes et
+invite aux modèles frontière : https://bench.lassence.net/ . Son texte (attentes et
 sources) est reproduit dans `prompt_paris_3d.md` avec l'accord de son auteur (17/10/2026). Apport de Pascal Chevallot (Comptoir des
 Signaux) : la section « Immersive 3D Fly-Through Navigation » (mode de vol libre).
 
