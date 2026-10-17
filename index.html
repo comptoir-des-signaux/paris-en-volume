@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paris en volume</title>
+  <meta name="description" content="Atlas en volume du bâti parisien : chaque bâtiment intra-muros à sa hauteur réelle, coloré selon sa période de construction, de 1800 à nos jours.">
+  <meta name="author" content="Pascal Chevallot ; Comptoir des Signaux">
+  <link rel="icon" href="data:,">
+  <script type="module" crossorigin src="./assets/index-gsAmjFAe.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BEan06O9.css">
+</head>
+<body>
+  <div id="map" aria-label="Carte en trois dimensions du bâti parisien"></div>
+  <div class="sky" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <p class="eyebrow">Atlas du bâti parisien</p>
+    <h1>Paris en volume</h1>
+    <p class="lede"><span id="lede-count">…</span> bâtiments intra-muros, dressés à leur hauteur réelle et colorés selon leur période de construction.</p>
+  </header>
+
+  <aside class="panel legend" id="legend">
+    <div class="panel-head">
+      <h2 id="legend-title">Périodes de construction</h2>
+      <p class="hint" id="legend-hint">Part du parc bâti, en nombre de bâtiments. Cliquer une période pour l'isoler.</p>
+    </div>
+    <ol class="periods" id="periods"></ol>
+    <div class="ghost-note">
+      <span class="ghost-swatch" aria-hidden="true"></span>
+      <span>En transparence : bâtiment dont la période englobe l'année choisie, sans date précise.</span>
+    </div>
+  </aside>
+
+  <section class="panel timeline" id="timeline" aria-label="Voyage dans le temps">
+    <div class="year-block">
+      <button class="play" id="play" aria-label="Lancer le voyage dans le temps" title="Lecture (P)">
+        <svg viewBox="0 0 24 24" class="icon-play" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+        <svg viewBox="0 0 24 24" class="icon-pause" aria-hidden="true"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z"/></svg>
+      </button>
+      <div class="year" id="year" aria-live="polite">2026</div>
+    </div>
+    <div class="track-block">
+      <div class="track-wrap">
+        <div class="track" id="track" aria-hidden="true"></div>
+        <input type="range" id="slider" min="1800" max="2026" step="1" value="2026" aria-label="Année">
+        <div class="ticks" id="ticks" aria-hidden="true"></div>
+      </div>
+      <p class="census" id="census">…</p>
+    </div>
+  </section>
+
+  <nav class="panel controls" aria-label="Commandes">
+    <button class="fly-btn" id="fly" title="Vol libre (F)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 13.5l7-1.6L15.8 4c.9-1 2.6-.6 2.9.7.1.5 0 1-.3 1.4l-5 7.3 1.4 6.9-1.9 1.1-3-5.9-4.2 1-1 2.3-1.6.5.3-3.4-2.9-1.4z"/></svg>
+      <span>Vol libre</span>
+    </button>
+    <div class="group">
+      <h3>Vues</h3>
+      <div class="presets" id="presets"></div>
+    </div>
+    <div class="group">
+      <h3>Calques</h3>
+      <label class="toggle"><input type="checkbox" id="t-trees" checked><span class="knob"></span>Arbres <small id="tree-count"></small></label>
+      <label class="toggle"><input type="checkbox" id="t-districts" checked><span class="knob"></span>Limites d'arrondissement</label>
+      <label class="toggle"><input type="checkbox" id="t-labels" checked><span class="knob"></span>Numéros d'arrondissement</label>
+    </div>
+    <div class="group risk">
+      <h3>Risque d'inondation</h3>
+      <label class="toggle"><input type="checkbox" id="t-ppri"><span class="knob"></span>Zonage du PPRI</label>
+      <ul class="zones" id="zones" hidden></ul>
+      <label class="toggle"><input type="checkbox" id="t-caves"><span class="knob"></span>Caves inondées (crue 1910)</label>
+      <label class="toggle" id="exposed-row"><input type="checkbox" id="t-exposed" disabled><span class="knob"></span>Bâtiments exposés seuls</label>
+      <div class="seg" id="exposed-color" role="radiogroup" aria-label="Couleur des bâtiments exposés" hidden>
+        <button type="button" role="radio" aria-checked="true" data-v="period">Par période</button>
+        <button type="button" role="radio" aria-checked="false" data-v="zone">Par zone</button>
+      </div>
+      <p class="hint" id="risk-msg">Pour information : seul le PPRI approuvé fait foi.</p>
+    </div>
+    <p class="hint">Glisser : tourner et incliner. Clic droit glissé ou Ctrl : déplacer. Molette : zoomer.</p>
+  </nav>
+
+  <button class="compass" id="compass" title="Remettre le nord en haut" aria-label="Remettre le nord en haut">
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="29" class="ring"/>
+      <g id="needle">
+        <path d="M32 7l6 25h-12z" class="north"/>
+        <path d="M32 57l-6-25h12z" class="south"/>
+        <text x="32" y="5.5" text-anchor="middle">N</text>
+      </g>
+    </svg>
+  </button>
+
+  <!-- Vol libre -->
+  <svg class="reticle" id="reticle" aria-hidden="true"><line id="steer-line"/><circle id="steer-dot" r="6"/><circle class="center" r="13"/><path class="center-cross" d=""/></svg>
+  <div class="flight-help" id="flight-help">
+    <h3>Vol libre</h3>
+    <dl>
+      <dt>Pointeur</dt><dd>indique la direction : la caméra s'y dirige et le regard suit</dd>
+      <dt>Clic gauche</dt><dd>un cran de vitesse en avant</dd>
+      <dt>Clic droit</dt><dd>un cran en arrière (vitesse négative après l'arrêt)</dd>
+      <dt>↑ ↓</dt><dd>accélérer, ralentir</dd>
+      <dt>← →</dt><dd>virer à gauche, à droite</dd>
+      <dt>Maj maintenue</dt><dd>altitude constante, quelle que soit l'orientation</dd>
+      <dt>T</dt><dd>suivi du relief : hauteur au-dessus du sol maintenue</dd>
+      <dt>Pg↑ Pg↓</dt><dd>monter, descendre</dd>
+      <dt>Glisser</dt><dd>regarder autour</dd>
+      <dt>Espace</dt><dd>arrêt progressif</dd>
+      <dt>Échap, F</dt><dd>quitter le vol</dd>
+    </dl>
+    <p>Ni l'altitude constante ni le suivi du relief n'évitent les bâtiments : surveillez l'alerte d'obstacle.</p>
+  </div>
+  <footer class="flightbar" id="flightbar" role="status" aria-live="off">
+    <div class="cell mode"><span class="k">Mode</span><span class="v" id="f-mode">Vol libre</span></div>
+    <div class="cell speed"><span class="k">Vitesse</span><span class="v" id="f-speed">0 m/s</span><span class="gauge" id="f-gauge"></span></div>
+    <div class="cell"><span class="k">Direction</span><span class="v" id="f-dir">-</span></div>
+    <div class="cell"><span class="k">Pente</span><span class="v" id="f-climb">0°</span></div>
+    <div class="cell"><span class="k">Altitude</span><span class="v" id="f-alt">-</span></div>
+    <div class="cell"><span class="k">Survol</span><span class="v" id="f-district">-</span></div>
+    <div class="cell alert" id="f-alert"></div>
+    <button class="exit" id="f-exit" title="Quitter le vol (Échap)">Quitter</button>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="tooltip"></div>
+
+  <footer class="credits">
+    <button id="about-btn" class="link">Méthode et sources</button>
+    <span>Données : Apur, Ville de Paris, licence <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener">ODbL</a> ; PPRI : DRIEAT, Licence Ouverte 2.0</span>
+  </footer>
+
+  <dialog class="about" id="about">
+    <form method="dialog"><button class="close" aria-label="Fermer">×</button></form>
+    <h2>Méthode et sources</h2>
+    <p><strong>Bâti.</strong> Chaque emprise bâtie de l'Apur est extrudée à sa hauteur médiane mesurée, posée sur l'altitude médiane de son sol. Les cours intérieures sont conservées. La couleur suit la période de construction renseignée par l'Apur.</p>
+    <p><strong>Voyage dans le temps.</strong> Un bâtiment daté à l'année près apparaît cette année-là (il s'élève, puis brille quelques années pendant la lecture). Un bâtiment connu seulement par sa période est dessiné en transparence tant que l'année choisie se trouve dans cette période, puis en couleur pleine : aucune date n'est inventée. Les bâtiments antérieurs à 1800 sont tous présents au départ. Les bâtiments non datés restent en transparence jusqu'à aujourd'hui. Les démolitions ne figurent pas dans la source : la carte montre l'âge du bâti actuel, pas l'état passé de la ville.</p>
+    <p><strong>Relief.</strong> Le sol est interpolé à partir de l'altitude au sol des emprises (MNT Apur), lissé à une dizaine de mètres. La Seine est posée à une cote approximative de 27 m, les canaux trois mètres sous leurs quais. Le canal Saint-Martin couvert (boulevard Richard-Lenoir) n'est pas figuré.</p>
+    <p><strong>Tour Eiffel.</strong> Ses emprises Apur (piles, étages, sommet) sont remplacées par une maquette simplifiée à sa hauteur réelle, de la même période.</p>
+    <p><strong>Périmètre.</strong> Paris intra-muros, hors bois de Boulogne et de Vincennes. Les arbres sont ceux du patrimoine arboré géré par la Ville ; le houppier est estimé à partir de la hauteur et de la circonférence.</p>
+    <p><strong>Risque d'inondation.</strong> Le zonage affiché est le zonage réglementaire du plan de prévention des risques d'inondation (PPRI) de Paris, publié par l'État (DRIEAT Île-de-France) et numérisé au 1/5 000 ; le PPRI a été approuvé par arrêté préfectoral du 15 juillet 2003. Il est rapproché du report qu'en fait le PLU de Paris : les deux placent <span id="risk-agree">…</span> des bâtiments dans la même zone. Zone rouge : le cours de la Seine. Zone verte : zone d'expansion des crues. Zones bleues : zone de risque, où l'occupation du sol est soumise aux prescriptions du PPRI, qui en distingue les nuances. Le zonage est dessiné sur le parcellaire cadastral : il couvre les parcelles (îlots, berges), pas la voirie, et se lit donc surtout sur les bâtiments, avec l'option « Bâtiments exposés seuls ». Un bâtiment est rattaché à une zone par un point de son emprise. Quelques centaines de bâtiments, dont Notre-Dame, sont enclavés dans le zonage sans y figurer : la donnée de l'État ne couvre pas leur emprise. <strong>Information sans valeur réglementaire</strong> : seul le PPRI approuvé fait foi, et la carte ne dit pas si un projet est possible. Les caves inondées sont un scénario de crue type 1910 publié par la Ville de Paris, pas un relevé historique.</p>
+    <h3>Sources</h3>
+    <ul id="sources"></ul>
+    <p><strong>Licence des données.</strong> Cette carte contient des informations issues des bases de l'Apur et de la Ville de Paris, mises à disposition sous la licence <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener">Open Database License (ODbL) 1.0</a>. Les fichiers que charge la carte (dossier <code>data/</code>) forment une base de données dérivée, diffusée sous la même licence. Le zonage du PPRI de l'État y est intégré selon la Licence Ouverte 2.0, compatible. Les scripts qui produisent cette base à partir des sources sont publiés avec le code de la carte.</p>
+    <p><strong>Code.</strong> Le code de la carte et ces scripts sont publiés sous licence EUPL-1.2 : <a href="https://github.com/comptoir-des-signaux/paris-en-volume" target="_blank" rel="noopener">github.com/comptoir-des-signaux/paris-en-volume</a>.</p>
+    <p class="small">D'après le banc d'essai <a href="https://bench.lassence.net/" target="_blank" rel="noopener">« LLM benchmark: 3D Atlas of Paris »</a> de Charles de Lassence, qui en a conçu l'idée et le cahier des charges. Mode de vol libre et direction : Pascal Chevallot ; Comptoir des Signaux. Code écrit par un agent d'IA (Claude).</p>
+  </dialog>
+
+  <div class="loader" id="loader">
+    <p class="eyebrow">Atlas du bâti parisien</p>
+    <h1>Paris en volume</h1>
+    <div class="gate" id="gate">
+      <p class="gate-lede">Chaque bâtiment de Paris intra-muros, à sa hauteur réelle et coloré selon sa période de construction.</p>
+      <p class="gate-cost">Le chargement transfère environ <b id="poids">13 Mo</b> de données et sollicite fortement la carte graphique. Un ordinateur est conseillé. Les couches de risque d'inondation ajoutent <b>203 ko</b>, à la demande.</p>
+      <p class="gate-warn" id="gate-warn" hidden></p>
+      <button class="gate-btn" id="gate-btn" type="button">Lancer la carte</button>
+    </div>
+    <div class="progress" id="progress" hidden>
+      <div class="bar"><span id="bar"></span></div>
+      <p class="loader-msg" id="loader-msg">Chargement des emprises bâties</p>
+    </div>
+  </div>
+
+</body>
+</html>

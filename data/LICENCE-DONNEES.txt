@@ -1,0 +1,25 @@
+Paris en volume : licence des fichiers de données (dossier data/)
+
+Ces fichiers forment une base de données dérivée des bases suivantes, toutes
+diffusées sous la licence Open Database License (ODbL) 1.0 :
+
+- Apur, « Emprise bâtie Paris » ;
+- Ville de Paris, « Arrondissements », « Plan de voirie : voies d'eau »,
+  « Espaces verts et assimilés », « Les arbres », « PLU bioclimatique : secteurs de
+  risque, inondations », « Zones des caves inondées - 1910 ».
+
+Elle intègre aussi le zonage réglementaire du « Plan de prévention des risques
+d'inondation à Paris » publié par la DRIEAT Île-de-France sous Licence Ouverte 2.0
+(https://www.data.gouv.fr/datasets/plan-de-prevention-des-risques-dinondation-a-paris),
+licence compatible avec l'ODbL. Ce zonage est fourni pour information, sans valeur
+réglementaire : seul le PPRI approuvé fait foi.
+
+La base dérivée est diffusée sous la même licence, ODbL 1.0 :
+https://opendatacommons.org/licenses/odbl/1-0/
+
+Les fichiers .gz sont compressés au format gzip. Les scripts qui produisent cette
+base à partir des sources (scripts/fetch_data.py et scripts/build_data.py) sont
+publiés avec le code de la carte.
+
+Contient des informations de l'Apur et de la Ville de Paris, mises à disposition
+sous la licence ODbL, et de la DRIEAT Île-de-France, sous Licence Ouverte 2.0.

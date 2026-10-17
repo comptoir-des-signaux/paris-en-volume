@@ -1,0 +1,308 @@
+{
+ "origin": [
+  2.333644,
+  48.858956
+ ],
+ "bounds": [
+  2.250041793877385,
+  48.8152113409864,
+  2.4172458003130846,
+  48.90270029902135
+ ],
+ "grid": {
+  "nx": 1228,
+  "ny": 974,
+  "cell": 10.0
+ },
+ "texture": {
+  "width": 6144,
+  "height": 4872
+ },
+ "yearMin": 1800,
+ "yearMax": 2026,
+ "seineLevel": 27.0,
+ "plinthBase": -40.0,
+ "periods": [
+  {
+   "code": 1,
+   "label": "Avant 1800",
+   "count": 11223,
+   "share": 0.08807,
+   "areaShare": 0.05805,
+   "start": null,
+   "end": 1800
+  },
+  {
+   "code": 2,
+   "label": "1801-1850",
+   "count": 17660,
+   "share": 0.13858,
+   "areaShare": 0.08519,
+   "start": 1801,
+   "end": 1850
+  },
+  {
+   "code": 3,
+   "label": "1851-1914",
+   "count": 56833,
+   "share": 0.44597,
+   "areaShare": 0.36861,
+   "start": 1851,
+   "end": 1914
+  },
+  {
+   "code": 5,
+   "label": "1915-1939",
+   "count": 10127,
+   "share": 0.07947,
+   "areaShare": 0.09793,
+   "start": 1915,
+   "end": 1939
+  },
+  {
+   "code": 6,
+   "label": "1940-1967",
+   "count": 6126,
+   "share": 0.04807,
+   "areaShare": 0.08072,
+   "start": 1940,
+   "end": 1967
+  },
+  {
+   "code": 7,
+   "label": "1968-1975",
+   "count": 4461,
+   "share": 0.03501,
+   "areaShare": 0.06971,
+   "start": 1968,
+   "end": 1975
+  },
+  {
+   "code": 8,
+   "label": "1976-1981",
+   "count": 2185,
+   "share": 0.01715,
+   "areaShare": 0.03655,
+   "start": 1976,
+   "end": 1981
+  },
+  {
+   "code": 9,
+   "label": "1982-1989",
+   "count": 2260,
+   "share": 0.01773,
+   "areaShare": 0.0352,
+   "start": 1982,
+   "end": 1989
+  },
+  {
+   "code": 10,
+   "label": "1990-1999",
+   "count": 4611,
+   "share": 0.03618,
+   "areaShare": 0.06261,
+   "start": 1990,
+   "end": 1999
+  },
+  {
+   "code": 11,
+   "label": "2000-2007",
+   "count": 2219,
+   "share": 0.01741,
+   "areaShare": 0.02712,
+   "start": 2000,
+   "end": 2007
+  },
+  {
+   "code": 12,
+   "label": "2008 et après",
+   "count": 2368,
+   "share": 0.01858,
+   "areaShare": 0.04514,
+   "start": 2008,
+   "end": null
+  },
+  {
+   "code": 99,
+   "label": "Non daté",
+   "count": 7365,
+   "share": 0.05779,
+   "areaShare": 0.03314,
+   "start": null,
+   "end": null
+  }
+ ],
+ "buildings": {
+  "count": 127675,
+  "features": 127438,
+  "vertices": 1682990,
+  "indices": 3921153,
+  "sections": {
+   "positions": {
+    "offset": 0,
+    "length": 3365980,
+    "type": "uint16"
+   },
+   "vertexValid": {
+    "offset": 6731960,
+    "length": 1682990,
+    "type": "uint8"
+   },
+   "startIndices": {
+    "offset": 8414952,
+    "length": 127676,
+    "type": "uint32"
+   },
+   "triStart": {
+    "offset": 8925656,
+    "length": 127676,
+    "type": "uint32"
+   },
+   "indices": {
+    "offset": 9436360,
+    "length": 3921153,
+    "type": "uint16"
+   },
+   "base": {
+    "offset": 17278672,
+    "length": 127675,
+    "type": "int16"
+   },
+   "elevation": {
+    "offset": 17534024,
+    "length": 127675,
+    "type": "uint16"
+   },
+   "height": {
+    "offset": 17789376,
+    "length": 127675,
+    "type": "uint16"
+   },
+   "ground": {
+    "offset": 18044728,
+    "length": 127675,
+    "type": "int16"
+   },
+   "period": {
+    "offset": 18300080,
+    "length": 127675,
+    "type": "uint8"
+   },
+   "yearStart": {
+    "offset": 18427760,
+    "length": 127675,
+    "type": "uint16"
+   },
+   "yearEnd": {
+    "offset": 18683112,
+    "length": 127675,
+    "type": "uint16"
+   },
+   "year": {
+    "offset": 18938464,
+    "length": 127675,
+    "type": "uint16"
+   },
+   "arrondissement": {
+    "offset": 19193816,
+    "length": 127675,
+    "type": "uint8"
+   },
+   "id": {
+    "offset": 19321496,
+    "length": 127675,
+    "type": "uint32"
+   }
+  }
+ },
+ "trees": {
+  "count": 175671,
+  "sections": {
+   "x": {
+    "offset": 0,
+    "length": 175671,
+    "type": "uint16"
+   },
+   "y": {
+    "offset": 351344,
+    "length": 175671,
+    "type": "uint16"
+   },
+   "z": {
+    "offset": 702688,
+    "length": 175671,
+    "type": "int16"
+   },
+   "height": {
+    "offset": 1054032,
+    "length": 175671,
+    "type": "uint8"
+   },
+   "radius": {
+    "offset": 1229704,
+    "length": 175671,
+    "type": "uint8"
+   },
+   "genus": {
+    "offset": 1405376,
+    "length": 175671,
+    "type": "uint8"
+   }
+  }
+ },
+ "eiffel": {
+  "lng": 2.294481,
+  "lat": 48.85837,
+  "z": 35.1,
+  "year": 1889,
+  "period": 2
+ },
+ "sources": [
+  {
+   "name": "Apur, Emprise bâtie Paris",
+   "licence": "ODbL",
+   "url": "https://carto2.apur.org/apur/rest/services/OPENDATA/EMPRISE_BATIE_PARIS/MapServer/0"
+  },
+  {
+   "name": "Ville de Paris, Arrondissements",
+   "licence": "ODbL",
+   "url": "https://opendata.paris.fr/explore/dataset/arrondissements"
+  },
+  {
+   "name": "Ville de Paris, Plan de voirie : voies d'eau",
+   "licence": "ODbL",
+   "url": "https://opendata.paris.fr/explore/dataset/plan-de-voirie-voies-deau"
+  },
+  {
+   "name": "Ville de Paris, Espaces verts et assimilés",
+   "licence": "ODbL",
+   "url": "https://opendata.paris.fr/explore/dataset/espaces_verts"
+  },
+  {
+   "name": "Ville de Paris, Les arbres",
+   "licence": "ODbL",
+   "url": "https://opendata.paris.fr/explore/dataset/les-arbres"
+  },
+  {
+   "name": "DRIEAT Île-de-France, Plan de prévention des risques d'inondation à Paris, zonage réglementaire",
+   "licence": "Licence Ouverte 2.0",
+   "url": "https://www.data.gouv.fr/datasets/plan-de-prevention-des-risques-dinondation-a-paris"
+  },
+  {
+   "name": "Ville de Paris, PLU bioclimatique : secteurs de risque, inondations (rapprochement)",
+   "licence": "ODbL",
+   "url": "https://opendata.paris.fr/explore/dataset/plub_pprizone"
+  },
+  {
+   "name": "Ville de Paris, Zones des caves inondées : crue type 1910",
+   "licence": "ODbL",
+   "url": "https://opendata.paris.fr/explore/dataset/zones-de-caves-inondees-1910"
+  }
+ ],
+ "risques": {
+  "ppri": 18086,
+  "caves": 22217,
+  "sameZoneShare": 0.99957,
+  "iouTotal": 0.9976
+ }
+}
